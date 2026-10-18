@@ -1,0 +1,19 @@
+;seguindo o man pages no linux obtive as syscalls
+#e seguindo os manuais da intel extrai os instrucoes
+#mais eficientes possiveis
+section .text
+       global _start
+_start:
+       mov al, 41; em vez de rax, a fim de preservar mais espaços na memoria durante a execução
+       mov dil, 2; em em vez de rdi
+       mov sil, 1; em vez de rsi
+       xor edx, edx; poderia ter sido 6 para indicar protocolo tcp em vez de zero, a intencao é automatizar a tarefa pois os dois argumentos anteriores já criam essa dependencia// Aqui utilizei o registrador de 32bits por conta dos bytes nos endereços superiores
+       syscall; Em arquitetura x86_64, utiliza-se fielmente syscall em vez de int0x80
+#Em caso de mecanismos de criacao de persitencias e movimentos laterais utiliza-se:
+       mov al, 41
+       mov dil, 1 ;AF_UNIX 
+       mov sil, 5 ;SEQPACKET
+       xor edx, edx
+       syscall
+
+🪿
